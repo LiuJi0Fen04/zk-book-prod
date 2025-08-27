@@ -30,10 +30,10 @@ assert a ** b != b ** a
 
 But we don’t care. A Magma is one of the least restrictive kinds of *algebraic structures*. All that matters is that the binary operator is closed. Everything else is fair game.
 
-An *algebraic structure* is a set with a collection of operations on that set. For our purposes, the only operation we care about is a binary operator.
+<u>An *algebraic structure* is a set with a collection of operations on that set. For our purposes, the only operation we care about is a binary operator.</u>
 
-## Semigroup
-A Semigroup is a Magma where the binary operator must be associative.
+## <u>Semigroup</u>
+A Semigroup is a Magma where the <u>binary operator must be associative.</u>
 
 All Semigroups are Magmas, but not all Magmas are Semigroups.
 
@@ -50,11 +50,18 @@ Note that if we commute “foo” and “bar”, the output string will not be t
 
 **Exercise:** Give an example of a Magma and a Semigroup. The Magma must not be a Semigroup. Don’t use the examples above. This means you must think of a binary operator that is closed but not associative for the Magma, and for the Semigroup, the binary operator must be closed and associative.
 
-## Monoid
-A Monoid is a Semigroup with an identity element.
+## <u>Monoid（幺半群）</u>
+A Monoid is <u>a Semigroup with an identity element.</u>
+
+在代数中，**identity element（单位元）**的定义是：
+
+> 对于某个二元操作 `⊕`，存在一个元素 `e`，使得对所有元素 `a` 都有：
+>
+> - `a ⊕ e = a`
+> - `e ⊕ a = a`
 
 
-Awww yes, this is the same Monoid from the “A monad is a monoid in the category of endofunctors.”
+Awww yes, this is the same Monoid from the “A monad（单子） is a monoid in the category（范畴学） of endofunctors（内函子）.”
 
 ![Math meme about monad tutorials](https://static.wixstatic.com/media/935a00_bd9a8814842b4359b63050555a1c1c95~mv2.png/v1/fill/w_500,h_991,al_c,q_90,enc_auto/935a00_bd9a8814842b4359b63050555a1c1c95~mv2.png)
 
@@ -72,7 +79,7 @@ trait Monoid[A] extends Semigroup[A] {
 
 The Cats library simply refers to "identity" as `empty` and the binary operator as `combine`. The fact that Monoid extends Semigroup shows that a Monoid is a Semigroup with the requirement that it has an "empty" (identity).
 
-The snippet above doesn’t show it, but it is indeed required that combine be associative.
+The snippet above doesn’ts show it, but it is indeed required that combine be associative.
 
 A Semigroup just has a binary operator with no restrictions on it except that it outputs the same type (`A`) as the inputs (`x`, and `y`).
 
