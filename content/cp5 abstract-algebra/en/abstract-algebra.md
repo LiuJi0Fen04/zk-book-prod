@@ -77,9 +77,9 @@ trait Monoid[A] extends Semigroup[A] {
 }
 ```
 
-The Cats library simply refers to "identity" as `empty` and the binary operator as `combine`. The fact that Monoid extends Semigroup shows that a Monoid is a Semigroup with the requirement that it has an "empty" (identity).
+<u>The Cats library simply refers to "identity" as `empty` and the binary operator as `combine`</u>. The fact that Monoid extends Semigroup shows that a Monoid is a Semigroup with the requirement that it has an "empty" (identity).
 
-The snippet above doesn’ts show it, but it is indeed required that combine be associative.
+The snippet above doesn’t show it, but it is indeed required that combine be associative.
 
 A Semigroup just has a binary operator with no restrictions on it except that it outputs the same type (`A`) as the inputs (`x`, and `y`).
 
@@ -97,52 +97,52 @@ $$
 \end{bmatrix}
 $$
 
-### Sets of sets over union and intersection
+### <u>Sets of sets over union and intersection</u>
 Something bizarrely absent from our earlier discussion of sets was the mention of union and intersection of sets. These are binary operators, and now is a good time to introduce them.
 
 If you take the union of two sets $\set{1,2,3,4}$ and $\set{3,4,5,6}$, you get $\set{1,2,3,4,5,6}$. If you take the intersection of $\set{1,2,3,4}$ and $\set{3,4,5,6}$, you get $\set{3, 4}$.
 
-It should be clear that both of these operators are associative.
+It should be clear that both of these operators are associative（结合律）.
 
-If we define our domain to be the set of all finite sets of integers, then the binary operators union and intersection are closed because their result is a set of integers.
+<u>If we define our domain to be the set of all finite sets of integers</u>, then the binary operators union and intersection are closed because their result is a set of integers.
 
-Set union has an identity element in this domain: the empty set $\set{}$. Take the union of a set with the empty set and you get the original set, i.e. $A \cup \set{} = A$.
+Set union has an <u>identity element</u> in this domain: the empty set $\set{}$. Take the union of a set with the empty set and you get the original set, i.e. <u>$A \cup \set{} = A$.</u>
 
-Hence, the set of all *finite* sets of integers over union is a Monoid.
+Hence, the set of all <u>*finite* sets of integers over union is a Monoid.</u>
 
-However, in the set of all possible finite sets of integers under intersection ($\cap$), it is a Semigroup -- no finite set will work as the identity. But if we expand this set to include $\mathbb{Z}$ itself -- that is, our set is $\{\text{all finite sets of integers}\}\cup\mathbb{\{Z\}}$ under intersection, then it becomes a Monoid, as $\mathbb{Z}$ is the identity element.
+However, in the set of all possible finite sets of integers under intersection ($\cap$), it is a Semigroup -- no finite set will work as the identity. <u>But if we expand this set to include $\mathbb{Z}$ itself -- that is, our set is $\{\text{all finite sets of integers}\}\cup\mathbb{\{Z\}}$ under intersection</u>, then it becomes a Monoid, <u>as $\mathbb{Z}$ is the identity element.</u>
 
 If it feels like we "hacked" the identity element in, we did.
 
 We’ll see later that elliptic curves use a trick like this and include a special point called the “point at infinity” to stay consistent with the algebraic laws. The point is that we need to be very clear what our identity element is if we say a set is a Monoid over some binary operator.
 
-As another example, we could say our set is all positive integers under addition, with the additional element $\text{mug}$. We define $\text{mug} + x = x$ and $x + \text{mug} = x$. As the architects of the systems, we are allowed to make our set consist of whatever we like, and the binary operator behave however we like. However, the binary operator must be closed, associative, and the set must have an identity element for that algebraic data structure to be a Monoid.
+As another example, we could say our set is all positive integers under addition, with the additional element $\text{mug}$. We define $\text{mug} + x = x$ and $x + \text{mug} = x$. As the architects of the systems, we are allowed to make our set consist of whatever we like, and the binary operator behave however we like. However, the binary operator must <u>be closed</u>, <u>associative, and the set must have an identity element</u> <u>for that algebraic data structure to be a Monoid.</u>
 
 If we restrict the domain to be all subsets of $\set{0,1,2,3,4,5}$, then intersection clearly becomes a Monoid because the identity element would be $\set{0,1,2,3,4,5}$, as any set of integers you intersect with it will produce the other set, i.e., $A \cap \set{0,1,2,3,4,5} = A$. For example, $\set{1,3,4} \cap \set{0,1,2,3,4,5} = \set{1,3,4}$.
 
-At this point it should be clear that the category of an algebraic structure for a given binary operator is very sensitive to the domain of the set.
+<u>At this point it should be clear that the category of an algebraic structure for a given binary operator is very sensitive to the domain of the set.</u>
 
 **Exercise:** Let our binary operator be the function `min(a,b)` over integers. Is this a Magma, Semigroup, or Monoid? What if we restrict the domain to be positive integers (zero or greater)? What about the binary operator `max(a,b)` over those two domains?
 
 **Exercise:** Let our set be all 3 bit binary numbers (a set of cardinality 8). Let our possible binary operators be bit-wise and, bit-wise or, bit-wise xor, bit-wise nor, bit-wise xnor, and bit-wise nand. Clearly this is closed because the output is a 3 bit binary number. For each binary operator, determine if the set under that binary operator is a Magma, Semigroup, or Monoid.
 
 ## Group - The Star of the Show
-A Group is a Monoid in which each element has an inverse.
+<u>A Group is a Monoid in which each element has an inverse.</u>
 
 Or to be explicit, it is a set with four properties
 
-1. The binary operator is closed (Magma)
-2. The binary operator is associative (Semigroup)
-3. The set has an identity element (Monoid)
-4. Every element has an *inverse*
+1. <u>The binary operator is closed (Magma)</u>
+2. <u>The binary operator is associative (Semigroup)</u>
+3. <u>The set has an identity element (Monoid)</u>
+4. <u>Every element has an *inverse*</u>
 
-That is, for any element $a$ in the set $A$, there exists an $a'$ such that $a \square a' = i$ where $i$ is the identity element and $\square$ is the binary operator. Spoken more mathematically, that would be:
+That is, for any element $a$ in the set $A$, there exists an $a'$ such that $a \square a' = i$ where $i$ is the identity element and $\square$ is the binary operator. <u>Spoken more mathematically, that would be:</u>
 
 $$
 \forall a \in A \space\space \exists a' \in A: a\square a' = i
 $$
 
-Here, $\square$ is the binary operator of the set.
+<u>Here, $\square$ is the binary operator of the set.</u>
 
 It is rather incorrect to say "the set has an inverse." To be precise, every element has another element in the set that is that element's inverse.
 
@@ -158,7 +158,7 @@ Here is a table to drive the point home
 | positive integers including zero | addition        | Monoid              | has identity, no inverses    |
 | all integers                     | addition        | Group               | every element has an inverse |
 
-Note that “inverse” is not meaningful if the set does not have an identity. By definition, applying the binary operator to an element and that element's inverse results in the identity element.
+<u>Note that “inverse” is not meaningful if the set does not have an identity.</u> By definition, applying the binary operator to an element and that element's inverse results in the identity element.
 
 **Exercise:** Why can’t strings under concatenation be a group?
 
@@ -170,24 +170,22 @@ Unfortunately, our tutorial must end here, because elementary group theory is th
 But now you have a lot of context to understand what a group is even though we barely discussed it here!
 
 ### A word about commutativity
-None of the algebraic data structures above are required to be commutative. If they are, we say they are abelian over their binary operator. In this context, "abelian" means that the binary operator is commutative, which means the order of the operands does not affect the result.
+<u>None of the algebraic data structures above are required to be commutative. If they are, we say they are abelian over their binary operator.</u> In this context, "abelian" means that the binary operator is <u>commutative, which means the order of the operands does not affect the result.</u>
 
 Abelian means the binary operator is commutative.
 
 But say abelian, you'll sound smarter.
 
-The technicality is we don't normally say "addition is abelian" but "the group is abelian over addition."
+The technicality is we don't normally say "addition is abelian" but "<u>the group is abelian over addition."</u>
 
 ## Subsets again
 Let’s tie this all back to what we learned at the beginning. Magmas, Semigroups, Monoids, and Groups are all sets that have a closed binary operator. A binary operator is just a map from all the ordered pairs of the set’s Cartesian product with itself back to itself.
 
-
-Groups are a subset of Monoids, Monoids are a subset of Semigroups, Semigroups are a subset of Magmas, and Magmas are a subset of sets in general. Every Group is also a Magma or a set, but a Magma is not necessarily a Group.
+<u>Groups are a subset of Monoids, Monoids are a subset of Semigroups, Semigroups are a subset of Magmas, and Magmas are a subset of sets in general.</u> Every Group is also a Magma or a set, but a Magma is not necessarily a Group.
 
 “Sets” are easy to conceptualize, but when we start talking about groups and other algebraic structures, it’s easy to start getting lost. Groups are very important in our study of cryptography. Just remember:
 
-
-**Groups are sets with a binary operator that follows four rules.**
+<u>**Groups are sets with a binary operator that follows four rules.**</u>
 
 
 Also, it’s time to free your mind from “addition” and “multiplication” being the primary way of combining things.
@@ -202,11 +200,11 @@ Before you began this tutorial, the sentence
 
 probably didn’t make sense.
 
-You might still have to translate that in your head like most learners of a second language, but you realize it’s actually packing a lot of information into a tiny space.
+You might still have to translate that in your head like most learners of a second language, <u>but you realize it’s actually packing a lot of information into a tiny space.</u>
 
 Could I say that sentence without the mathiness? Of course I could, but it would take me at least 500 words to do it clearly. It’s actually worth understanding what those terms mean. This will save us a lot of trouble in the long run.
 
-What makes it cool is there are a plethora of theorems about Groups that let us make claims about the group *without understanding how the binary operator of the group works under the hood.* This is somewhat analogous to polymorphism in object-oriented programming or traits in functional languages. They hide implementation details from you and let you focus on the high level. That is powerful.
+What makes it cool is there are a plethora（过剩） of theorems about Groups that let us make claims about the group *without understanding how the binary operator of the group works under the hood.* This is somewhat analogous to polymorphism（多态） in object-oriented programming or traits in functional languages. They hide implementation details from you and let you focus on the high level. That is powerful.
 
 In the next chapter, you will learn how groups can be "related" to each other through homomorphisms.
 

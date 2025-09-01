@@ -4,7 +4,7 @@ A homomorphism between two groups exists if a *structure preserving map* between
 
 Suppose we have two algebraic data structures $(A,\square)$ and $(B, \blacksquare)$, where the binary operator of $A$ is $\square$ and the binary operator of $B$ is $\blacksquare$.
 
-A homomorphism from $A$ to $B$ exists if and only if there exists a function $\phi: A\rightarrow B$ such that
+A homomorphism from $A$ to $B$ exists if and only if there exists <u>a function $\phi: A\rightarrow B$</u> such that
 
 $$
 \phi(a_i \square a_j)=\phi(a_i)\blacksquare\phi(a_j)\space\space\forall a_i,a_j\in A
@@ -12,7 +12,7 @@ $$
 
 In other words, if $a_i \square a_j = a_k$, then $\phi(a_i) \blacksquare \phi(a_j) = \phi(a_k)$.
 
-Note that a homomorphism is one-directional. The function $\phi$ takes elements in $A$ and maps them to elements in $B$. We have no requirements about "going backwards."
+Note that a homomorphism is <u>one-directional.</u> The function <u>$\phi$ takes elements in $A$ and maps them to elements in $B$. We have no requirements about "going backwards."</u>
 
 We’ll first show some simple examples, provide some clarification, and then provide more complex examples.
 
@@ -33,7 +33,7 @@ $$
 \end{align*}
 $$
 
-### All strings under concatenation to all integers zero or greater
+### All strings under <u>concatenation</u> to all integers zero or greater
 
 For example, let $A$ be the Monoid of all strings (including the empty string) under concatenation, and let $B$ be the Monoid of all integers zero or greater under addition.
 
@@ -64,7 +64,7 @@ $$
 \end{align*}
 $$
 
-### All real numbers under addition to all $n\times m$ matrices of real number under addition
+### <u>All real numbers under addition to all $n\times m$ matrices of real number under addition</u>
 
 Some homomorphisms may seem rather trivial once you get the hang of them. This is an example of such a homomorphism. In this case, our function $\phi$ simply repeats the real number $n\times m$ times. For example, if $n=3$ and $m=2$, then $\phi(8.8)$ would be:
 
@@ -96,12 +96,12 @@ $$
 \end{bmatrix}
 $$
 
-## Clarifications about Homomorphisms
+## <u>Clarifications about Homomorphisms</u>
 
-- $\phi$ must work with every possible pair of elements from $A$ (including pairs of the same element). However, it does not need to “access” all the elements of $B$. For example, a homomorphism that maps every element in $A$ to the identity element in $B$ is a valid homomorphism, but not a useful one. It’s called the *trivial homomorphism*.
+- $\phi$ must work with every possible pair of elements from $A$ (including pairs of the same element). However, it does not need to “access” all the elements of $B$. <u>For example, a homomorphism that maps every element in $A$ to the identity element in $B$ is a valid homomorphism, but not a useful one. It’s called the *trivial homomorphism*.</u>
 - If we choose two arbitrary sets with a binary operator, a homomorphism may not necessarily exist.
 - There may be a homomorphism from $A$ to $B$, but not necessarily from $B$ to $A$.
-- If there is a homomorphism from $A$ to $B$ and from $B$ to $A$, and $\phi$ is the map from $A$ to $B$, the inverse of $\phi$ may not necessarily be a valid map for the homomorphism from $B$ to $A$
+- <u>If there is a homomorphism from $A$ to $B$ and from $B$ to $A$, and $\phi$ is the map from $A$ to $B$, the inverse of $\phi$ may not necessarily be a valid map for the homomorphism from $B$ to $A$</u>
 
 ## More examples of homomorphisms
 
@@ -138,7 +138,7 @@ $$
 
 ### Integers under addition to integer powers of $b$ under multiplication modulo a prime number
 
-### $n\times m$ matrices under addition to integers under addition
+### <u>$n\times m$ matrices under addition to integers under addition</u>
 
 In this case, $\phi$ simply adds up all the elements in a matrix. Why this works is left as an exercise for the reader.
 
@@ -151,6 +151,21 @@ XY=Z\rightarrow\det(X)\det(Y)=\det(Z)
 $$
 
 where $X,Y,Z$ are $2\times2$ integer matrices. Why these are two algebraic data structures are Monoids and not groups are left as an exercise for the reader.
+
+#### 1. **整数乘法不是群**
+
+- 因为整数中只有 ±1\pm1 有乘法逆元
+- 比如 2×x=12 \times x = 1 没有整数解，所以整数乘法不是群，只是 Monoid（有单位元 1，但不是每个元素都有逆元）
+
+#### 2. **整数矩阵乘法也不是群**
+
+- 并不是所有 2×22 \times 2 整数矩阵都有逆矩阵
+- 只有行列式为 ±1\pm1 的矩阵才有整数逆元
+- 所以这个集合也不是群，只是 Monoid（单位元是单位矩阵）
+
+
+
+
 
 ### The group of rational numbers (excluding rational numbers where the denominator is a multiple of $p$) to addition modulo $p$
 
