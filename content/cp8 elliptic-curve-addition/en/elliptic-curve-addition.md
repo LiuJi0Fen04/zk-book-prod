@@ -19,13 +19,13 @@ Depending on what value of a and b you pick, you’ll get a curve that looks lik
 
 A point on an elliptic curve is an $(x, y)$ pair that satisfies $y² = x³ + ax + b$ for a given $a$ and $b$.
 
-For example, the point $(3, 6)$ is in the curve $y² = x³ + 9$ because it $6² = 3³ + 9$. In group theoretic terms, $(3, 6)$ is a member of the set defined by $y² = x³ + 9$. Since we are dealing with real numbers, the set has infinite cardinality.
+For example, the point $(3, 6)$ is in the curve $y² = x³ + 9$ because it $6² = 3³ + 9$. In group theoretic terms, $(3, 6)$ is a member of the set defined by $y² = x³ + 9$. Since we are dealing with real numbers, the set has infinite cardinality(**基数** 或 **势**).
 
 The idea here is we can take two points from this set, do a binary operator, and we will get another point that is also in the set. That is, it is an $(x, y)$ pair that also lies on the curve.
 
 **Instead of thinking about elliptic curves as a plot on a graph, think of them as an infinite set of points. Points are in the set if and only if they satisfy the elliptic curve equation.**
 
-Once we see these points as a set, looking at them as a group isn’t mysterious. We just take two points, and produce a third according to the rules of a group.
+Once we see these points as a set, looking at them as a group isn’t mysterious. <u>We just take two points, and produce a third according to the rules of a group.</u>
 
 Specifically, to be a group, the set of points needs to have:
 - a binary operator that is closed and associative, i.e. it produces another point in the set
@@ -43,18 +43,18 @@ So given three points on the elliptic curve $A$, $B$, and $C$ (or $(x_a, y_a)$, 
 - $(A ⊕ B) ⊕ C = A ⊕ (B ⊕ C)$
 - $A ⊕ B = B ⊕ A$
 
-I’m using $⊕$, because we know this binary operator is not addition in any normal sense, but a binary operator (again, remember from set theory, a binary operator takes two elements in a set and returns another element in a set, how it does that is not central to the definition).
+<u>I’m using $⊕$, because we know this binary operator is not addition in any normal sense, but a binary operator (again, remember from set theory, a binary operator takes two elements in a set and returns another element in a set, how it does that is not central to the definition).</u>
 
 We also know that there has to be an identity element somewhere. That is, any $(x, y)$ point that falls on the curve is combined with the identity element, the output is the same $(x, y)$ point unchanged.
 
-And because this is a group and not a monoid, every point needs to have an inverse such that $P ⊕ P⁻¹ = I$, where $I$ is the identity element.
+<u>And because this is a group and not a monoid, every point needs to have an inverse such that $P ⊕ P⁻¹ = I$, where $I$ is the identity element.</u>
 
 ### The identity element
 Intuitively, we might think of $(0, 0)$ or $(1, 1)$ being the identity element, since something like that often is in other groups, but you can see in the plots above that those points generally do not land on the curve. Since they don’t belong to the set of points on $y² = x³ + ax + b$, they are not part of the group.
 
 But recall from set theory that we can define binary operators however we like over sets arbitrarily defined. This allows us to add a special element that isn’t technically on the curve but by definition is the identity element.
 
-I like to think of the identity element as "the point that is nowhere" because if you combine nowhere with any real point, nothing changes. Annoyingly, mathematicians call this point, the identity element "the point at infinity."
+I like to think of the identity element as "the point that is nowhere" because if you combine nowhere with any real point, nothing changes. <u>Annoyingly, mathematicians call this point, the identity element "the point at infinity."</u>
 
 Hey wait, isn’t this point supposed to satisfy $y² = x³ + ax + b$? Nowhere (or infinity) is not a valid value for $(x, y)$.
 
@@ -79,13 +79,13 @@ It turns out, even though it looks like the purple line ($y = 10x$) is rising fa
 
 If we zoom out far enough, we can see the intersection. This is true in general.
 
-**As long as x is not "perfectly vertical" if it crosses two points on the curve, it will always cross a third.** Two of those points could be the same point if one of the points of intersection is a tangent point.
+**<u>As long as x is not "perfectly vertical" if it crosses two points on the curve, it will always cross a third</u>.** <u>Two of those points could be the same point if one of the points of intersection is a tangent point.</u>
 
 The "if we intersect two points" is important. If we shift our purple line over to the left so it doesn’t cross the "U-turn" of the elliptic curve, then it will only cross at one point
 
 Another way of understanding it:
 
-**If a straight line crosses an elliptic curve at exactly two points, and neither of the intersection points are tangent intersections, then it must be perfectly vertical.**
+<u>**If a straight line crosses an elliptic curve at exactly two points, and neither of the intersection points are tangent intersections, then it must be perfectly vertical.**</u>
 
 You could work out an algebraic proof from the formulas above, but I think the geometric argument is more intuitive.
 
@@ -95,7 +95,7 @@ Our exception for vertical lines actually causes inverse and identity elements t
 
 **The inverse of an elliptic curve point is the negative of the y value of the pair.** That is, the inverse of $(x, y)$ is $(x, -y)$ and vice versa. Drawing a line through such points creates a perfectly vertical line.
 
-The identity element is the "point at infinity" we alluded to earlier is simply the point "way up there" when we draw a vertical line.
+The identity element is the "point at infinity" we alluded(暗指；影射；间接提到) to earlier is simply the point "way up there" when we draw a vertical line.
 
 ### Abelian Group
 The fact that elliptic curve points are a group under our “2 points always result in a 3rd except for the identity” makes its commutative nature obvious.
@@ -131,7 +131,7 @@ $$
 
 This says $B$ is equal to it’s inverse. But $B$ is not the identity element (which is the only element that can be the inverse of itself), so we have a contradiction.
 
-Thankfully, there is a way to rescue this. Just define point addition to be the third point *flipped over the y axis*. Again, we are *allowed to do this* because binary operators can be defined however we like, we just care that our definitions satisfy the group laws.
+<u>Thankfully, there is a way to rescue this. Just define point addition to be the third point *flipped over the y axis*. Again, we are *allowed to do this* because binary operators can be defined however we like, we just care that our definitions satisfy the group laws.</u>
 
 So the correct way to add elliptic curve points is represented graphically below
 
@@ -152,7 +152,8 @@ One can derive how to compute $P₃ = (x₃, y₃)$ where $P₃ = P₁ ⊕ P₂$
 $$
 \begin{align*}
 \lambda &= \frac{y₂ - y₁}{x₂ - x₁} \\
-x₃ &= \lambda² - x₁ - x₂ \\
+x₃ &= \lambda² - x₁ - x₂(Vieta定理
+) \\
 y₃ &= \lambda(x₁-x₃) - y₁
 \end{align*}
 $$
@@ -179,7 +180,7 @@ x_q = lambda_q^2 - x_u - x_t
 y_q = (lambda_q*(x_u - x_q) - y_u)
 ```
 
-Here is a screenshot of running the above code in Jupyter notebook and pretty printing the output. The computer algebra system needs a bit of coaxing, but we can clearly see `x_q == x_p` and `y_q == y_p`.
+Here is a screenshot of running the above code in Jupyter notebook and pretty printing the output. <u>The computer algebra system needs a bit of coaxing</u>, but we can clearly see `x_q == x_p` and `y_q == y_p`.
 
 ![Algebraically demonstrating commutativity and associativity](https://static.wixstatic.com/media/935a00_fb8599e0572c4987b88525005917b394~mv2.png/v1/fill/w_1246,h_1140,al_c,q_90,enc_auto/935a00_fb8599e0572c4987b88525005917b394~mv2.png)
 
@@ -197,7 +198,7 @@ Let’s see that elliptic curves meet the group property.
 
 A binary operator must accept every possible pair from the set. What if the pair is the same element, i.e. A ⊕ A?
 
-## Point multiplication: adding a point with itself
+## <u>Point multiplication: adding a point with itself</u>
 Let’s think of this in limit terms. Adding a point to itself is like bringing two points infinitesimally close to each other until they become the same point. When this convergence happens, the slope of the line will lie tangent to the curve.
 
 So adding a point to itself is simply taking the derivative at that point, getting the intersection, then flipping the $y$ axis.
@@ -206,7 +207,7 @@ The following image graphically demonstrates $A ⊕ A = 2A$.
 
 ![Point multiplication on an elliptic curve](https://static.wixstatic.com/media/935a00_61ed6a7a5ba14b53a95cf5c16e54f3f5~mv2.png/v1/fill/w_1230,h_1228,al_c,q_90,enc_auto/935a00_61ed6a7a5ba14b53a95cf5c16e54f3f5~mv2.png)
 
-### Shortcut for point multiplication
+### <u>Shortcut for point multiplication</u>
 What if we wanted to compute $1000A$ instead of $2A$? It would seem this is an $\mathcal{O}(n)$ operation, but it isn’t.
 
 Because of associativity, we can write $1000A$ as
@@ -240,7 +241,7 @@ In my opinion, if you try to understand elliptic curves math in isolation from f
 
 That makes for a smoother learning experience.
 
-### Algebraic manipulation is really just associative addition.
+### <u>Algebraic manipulation is really just associative addition.</u>
 Let $P$ be an elliptic curve point. What happens we do something like this?
 
 $$(a + b)P + cP = aP + (b + c)P$$
@@ -261,7 +262,7 @@ $$
 
 Scalar "multiplication" isn’t "distributive" the way we would think about normal algebra. It’s just shorthand for rearranging the order in which we add P to itself.
 
-Under the hood, we just added $P$ to itself $(a + b + c)$ times. The order we do it in doesn’t matter because of associativity.
+<u>Under the hood, we just added $P$ to itself $(a + b + c)$ times. The order we do it in doesn’t matter because of associativity.</u>
 
 So when you see manipulation like that, our group didn’t suddenly gain a multiplication binary operator, it’s just misleading shorthand.
 

@@ -14,14 +14,14 @@ Not every $x$ value will result in an integer for the $y$ value when we solve th
 
 Code to generate this plot will be provided later.
 
-### The prime number changes the plot dramatically
+### <u>The prime number changes the plot dramatically</u>
 Here are some plots of $y² = x³ + 3$ done over modulo 11, 23, 31, and 41 respectively. The higher the modulus, the more points it holds, and the more complex the plot appears to be.
 
 ![Plot of elliptic curves modulo 11, 23](https://static.wixstatic.com/media/935a00_e592040ff7174e81a1f32ed7ed70a150~mv2.png/v1/fill/w_1053,h_565,al_c,q_90,enc_auto/935a00_e592040ff7174e81a1f32ed7ed70a150~mv2.png)
 
 ![Plot of elliptic curves modulo 23, 31](https://static.wixstatic.com/media/935a00_382bd8455deb45efba13fdb7d77517b4~mv2.png/v1/fill/w_1053,h_565,al_c,q_90,enc_auto/935a00_382bd8455deb45efba13fdb7d77517b4~mv2.png)
 
-We established in the previous article that elliptic curve points with the "connect and flip" operation are a group. When we do this over a finite field, it remains a group, but it becomes a cyclic group, which is tremendously useful for our application. Why it is cyclic unfortunately will require some very involved math, so you’ll just have to accept that for now. But this should not be too surprising. We have a finite number of points, so generating each point by carrying out $(x + 1)G, (x + 2)G, … (x + \text{order} - 1)G$ should at least seem plausible.
+We established in the previous article that elliptic curve points with the "connect and flip" operation are a group. When we do this over a finite field, it remains a group, <u>but it becomes a cyclic group</u>, which is tremendously useful for our application. Why it is cyclic unfortunately will require some very involved math, so you’ll just have to accept that for now. But this should not be too surprising. <u>We have a finite number of points, so generating each point by carrying out $(x + 1)G, (x + 2)G, … (x + \text{order} - 1)G$ should at least seem plausible.</u>
 
 In the application of cryptography, $p$ needs to be large. In practice, it is over 200 bits. We will revisit this in a later section.
 
@@ -40,13 +40,13 @@ A cyclic [group](https://www.rareskills.io/group-theory) is a group such that ev
 
 A very simple example is integers modulo 11 under addition. If your generator is 1, and you keep adding the generator to itself, you can generate every element in the group from 0 to 10.
 
-Saying a elliptic curve points form a cyclic group (under elliptic curve addition) means we can represent every number in a finite field as an elliptic curve point and add them together just like we would regular integers in a finite field.
+<u>Saying a elliptic curve points form a cyclic group (under elliptic curve addition) means we can represent every number in a finite field as an elliptic curve point and add them together just like we would regular integers in a finite field.</u>
 
 That is,
 
-$5 + 7 \pmod p$ is homomorphic to $5G + 7G$
+<u>$5 + 7 \pmod p$ is homomorphic to $5G + 7G$</u>
 
-Where G is the generator of the elliptic curve cyclic group. 
+<u>Where G is the generator of the elliptic curve cyclic group.</u> 
 
 This is only true of elliptic curves over finite fields that have a prime number of points, which are the kinds of curves we use in practice. This is something we'll revisit later.
 
@@ -76,7 +76,7 @@ print(curve_order)
 The field modulus is very large, which makes experimenting with it unwieldy. In the next section, we’ll build up an intuition for elliptic curve points in finite fields using the same formula, but with a smaller modulus.
 
 ## Generating elliptic curve cyclic group $y² = x³ + 3 \pmod {11}$
-To solve the equation above, and determine which $(x, y)$ points are on the curve, we’ll need to compute $\sqrt{(x³ + 3)} \pmod {11}$.
+To solve the equation above, and determine which $(x, y)$ points are on the curve, <u>we’ll need to compute $\sqrt{(x³ + 3)} \pmod {11}$.</u>
 
 ### Modular square roots
 We use the [Tonelli Shanks Algorithm](https://en.wikipedia.org/wiki/Tonelli%E2%80%93Shanks_algorithm) to compute modular square roots. You can read up on how the algorithm works if you are curious, but for now you can treat it as a black box that computes the mathematical square root of a field element over a modulus, or lets you know if the square root does not exist.

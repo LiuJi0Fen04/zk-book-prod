@@ -173,7 +173,7 @@ This concept was already taught in our article on [finite fields](https://www.ra
 
 Let $A$ be the group of all rational numbers whose denominators are not a multiple of $p$, under addition. Let $B$ be the finite field modulo $p$.
 
-There exists a homomorphism from group $A$ to group $B$. $\phi$ is 
+There exists a homomorphism from group $A$ to group $B$. <u>$\phi$ is</u> 
 
 $$
 \phi(x) = \mathsf{numerator}(x)\times\mathsf{modular\_inverse}(\mathsf{denominator}(x)) \pmod p
@@ -197,7 +197,7 @@ For example:
 
 Saying $1/3$ is congruent to $6 \pmod {17}$ is equivalent to the statement $\phi(1/3)=6$.
 
-### The Monoid of rational numbers (excluding rational numbers where the denominator is a multiple of $p$) to multiplication modulo $p$ (excluding zero)
+### <u>The Monoid of rational numbers (excluding rational numbers where the denominator is a multiple of $p$) to multiplication modulo $p$ (excluding zero)</u>
 
 Let’s use the same example as above, but with multiplication. The function $\phi$ remains the same.
 
@@ -217,7 +217,7 @@ Find a homomorphism for the following pairs of algebraic data structures. If you
 
 ## Homomorphic Encryption
 
-If $\phi$ is computationally difficult to invert, then $\phi$ *homomorphically encrypts* the elements of $A$.
+<u>If $\phi$ is computationally difficult to invert, then $\phi$ *homomorphically encrypts* the elements of $A$.</u>
 
 Let $A$ be all integers under addition, and $B$ be the target group and $\blacksquare$ be binary operator of $B$.
 
@@ -228,24 +228,24 @@ $$
 x\blacksquare y \stackrel{?}=\phi(5)
 $$
 
-Note that homomorphic encryption implies that the verifier knows the function $\phi$.
+<u>Note that homomorphic encryption implies that the verifier knows the function $\phi$.</u>
 
 ### Zero Knowledge Addition, example 2
 A prover makes the claim, "I have two numbers $a$ and $b$, and $b$ is five times $a$." The prover sends $\phi(a)$ and $\phi(b)$ to the verifier, and the verifier checks that
 
 $$\phi(a) + \phi(a) + \phi(a) + \phi(a) + \phi(a) = \phi(b)$$
 
-Remember, "multiplication" here is not the binary operator, it's simply shorthand for repeated addition.
+<u>Remember, "multiplication" here is not the binary operator, it's simply shorthand for repeated addition.</u>
 
 In these examples, note that we didn’t say anything about what elements of $B$ are or what $\blacksquare$ is. $B$ can be scary mathematical objects, and $\blacksquare$ can be a scary mathematical operator, but *that doesn’t matter*.
 
-This is the beauty of abstract algebra: *we don’t need to know*. As long as it has the properties we care about, we can reason about its behavior even if we know nothing about the implementation.
+<u>This is the beauty of abstract algebra</u>: <u>*we don’t need to know*. As long as it has the properties we care about, we can reason about its behavior even if we know nothing about the implementation.</u>
 
 ## Motivation
 
 Okay cool; we understand groups and homomorphisms, but how does this help us? The reason I went through all the effort explaining this is because I want you to understand the statement below:
 
-“Elliptic curve points in a finite field under addition are a finite cyclic group and integers under addition are homomorphic to this group.”
+<u>“Elliptic curve points in a finite field under addition are a finite cyclic group and integers under addition are homomorphic to this group.”</u>
 
 You probably don’t know what elliptic curve points are or what adding them means, but you do know:
 
@@ -278,16 +278,16 @@ Again, groups don’t need to be mysterious moon math. You’ve worked with grou
 
 It’s far more efficient to say "group" than it is to say "this is a set with a way to combine elements associatively and the elements all have blah blah blah."
 
-I know this may seem like a huge tangent, but trust me, understanding "homomorphism" enables us to succinctly describe a concept that we will regularly see. It will also come in handy again when we discuss [Quadratic Arithmetic Programs](https://www.rareskills.io/post/quadratic-arithmetic-program). Homomorphisms appear frequently in the ZK world.
+I know this may seem like a huge tangent, but trust me, understanding "homomorphism" enables us to succinctly（简明地；言简意赅地) describe a concept that we will regularly see. It will also come in handy again when we discuss [Quadratic Arithmetic Programs](https://www.rareskills.io/post/quadratic-arithmetic-program)(二次算术程序). Homomorphisms appear frequently in the ZK world.
 
 Imagine trying to discuss tree data structures without a word for "roots" or "leaves." That would be immensely frustrating.
 
 ## Summary
 
-A homomorphism from $A$ to $B$ exists **if and only if** a function $\phi$ exists that takes an element from $A$ and returns and element from $B$ and  $\phi(a_i \square a_j)=\phi(a_i)\blacksquare\phi(a_j)$ or all $a_i$ and $a_j$ in $A$, where $\square$ is the binary operator of $A$ and $\blacksquare$ is the binary operator of $B$. **The existence of $\phi$ is sufficient for the homomorphism to exist.**
+A homomorphism from $A$ to $B$ exists **if and only if** a function $\phi$ exists that takes an element from $A$ and returns and element from $B$ and  $\phi(a_i \square a_j)=\phi(a_i)\blacksquare\phi(a_j)$ or all $a_i$ and $a_j$ in $A$, where $\square$ is the binary operator of $A$ and $\blacksquare$ is the binary operator of $B$. **<u>The existence of $\phi$ is sufficient for the homomorphism to exist.</u>**
 
-Homomorphisms are not necessarily bidirectional. They are only required to work in one direction, from $A$ to $B$.
+<u>Homomorphisms are not necessarily bidirectional. They are only required to work in one direction, from $A$ to $B$.</u>
 
-If $\phi: A \rightarrow B$ is computationally difficult to invert, then $\phi$ homomorphically encrypts the elements of $A$. That means we can validate claims about computations in $A$ using elements in $B$.
+<u>If $\phi: A \rightarrow B$ is computationally difficult to invert, then $\phi$ homomorphically encrypts the elements of $A$. That means we can validate claims about computations in $A$ using elements in $B$.</u>
 
 The good news is, we are done with our treatment of abstract algebra, and we now have a strong foundation to move on to [elliptic curves](https://www.rareskills.io/post/elliptic-curve-addition).
