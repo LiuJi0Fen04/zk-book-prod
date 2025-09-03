@@ -17,7 +17,7 @@ Code to generate this plot will be provided later.
 ### <u>The prime number changes the plot dramatically</u>
 Here are some plots of $y² = x³ + 3$ done over modulo 11, 23, 31, and 41 respectively. The higher the modulus, the more points it holds, and the more complex the plot appears to be.
 
-![Plot of elliptic curves modulo 11, 23](https://static.wixstatic.com/media/935a00_e592040ff7174e81a1f32ed7ed70a150~mv2.png/v1/fill/w_1053,h_565,al_c,q_90,enc_auto/935a00_e592040ff7174e81a1f32ed7ed70a150~mv2.png)
+![0](https://static.wixstatic.com/media/935a00_e592040ff7174e81a1f32ed7ed70a150~mv2.png/v1/fill/w_1053,h_565,al_c,q_90,enc_auto/935a00_e592040ff7174e81a1f32ed7ed70a150~mv2.png)
 
 ![Plot of elliptic curves modulo 23, 31](https://static.wixstatic.com/media/935a00_382bd8455deb45efba13fdb7d77517b4~mv2.png/v1/fill/w_1053,h_565,al_c,q_90,enc_auto/935a00_382bd8455deb45efba13fdb7d77517b4~mv2.png)
 
@@ -83,7 +83,7 @@ We use the [Tonelli Shanks Algorithm](https://en.wikipedia.org/wiki/Tonelli%E2%8
 
 For example, the square root of 5 modulo 11 is 4 $(4 \times 4 \mod 11 = 5)$, but there is no square root of 6 modulo 11. (The reader is encouraged to discover this is true via brute force).
 
-Square roots often have two solutions, a positive and a negative one. Although we don’t have numbers with a negative sign in a finite field, we still have a notion of "negative numbers" in the sense of having an inverse.
+<u>Square roots often have two solutions, a positive and a negative one</u>. Although we don’t have numbers with a negative sign in a finite field, we still have a notion of "negative numbers" in the sense of having an inverse.
 
 You can find code online to implement the algorithm described above, but to avoid putting large chunks of code in this tutorial, we will install a Python library instead.
 
@@ -118,7 +118,7 @@ assert (7 ** 2) % 11 == 5
 assert (4 + 7) % 11 == 0
 ```
 
-Now that we know how to compute modular square roots, we can iterate through values of $x$ and compute $y$ from the formula $y² = x³ + b$. Solving for $y$ is just a matter of taking the modular square root of both sides (if it exists) and saving the resulting $(x, y)$ pairs so we can plot them later.
+Now that we know how to compute modular square roots, we can iterate through values of $x$ and compute $y$ from the formula $y² = x³ + b$. <u>Solving for $y$ is just a matter of taking the modular square root of both sides (if it exists) and saving the resulting $(x, y)$ pairs so we can plot them later.</u>
 
 Let’s create a simple plot of an elliptic curve
 
@@ -162,17 +162,16 @@ The result of the plot is shown below:
 
 Some observations:
 
-- There won’t be any x or y values greater than or equal to the modulus we use
-- Just like the real-valued plot, the modular one "appears symmetric"
+- <u>There won’t be any x or y values greater than or equal to the modulus we use</u>
+- <u>Just like the real-valued plot, the modular one "appears symmetric"</u>
 
 ## Elliptic curve point addition
 Even more interestingly, our “connect the dots and flip” operation to compute elliptic curves still works!
 
 
-But given that we are doing this over a finite field, this should not be surprising. Our formulas over real numbers use the normal field operations of addition and multiplication. Although we use square roots to determine if a point is on the curve, and square roots are not a valid field operator, we do not use square roots to compute the addition and doubling of points.
+But given that we are doing this over a finite field, this should not be surprising. Our formulas over real numbers use the normal field operations of addition and multiplication. <u>Although we use square roots to determine if a point is on the curve, and square roots are not a valid field operator, we do not use square roots to compute the addition and doubling of points.</u>
 
-
-The reader can verify this by picking two points from the plots above, then plugging them into the code below to add points and seeing they always land on another point (or the point on infinity if the points are inverses of each other). These formulas are taken from the [Wikipedia page on elliptic curve point multiplication](https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication).
+<u>The reader can verify this by picking two points from the plots above, then plugging them into the code below to add points and seeing they always land on another point (or the point on infinity if the points are inverses of each other).</u> These formulas are taken from the [Wikipedia page on elliptic curve point multiplication](https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication).
 
 ```python
 def double(x, y, a, p):
@@ -580,3 +579,161 @@ The materials here on RareSkills are carefully designed to stay clear of these m
 This is why our [zero knowledge course](https://www.rareskills.io/zk-bootcamp) stresses the basics of abstract algebra so much. Understanding the implementation details of elliptic curves is nightmarishly hard. But understanding the behavior of cyclic groups, while unusual at first, is fully comprehensible to most programmers. Once we understand that, the general behavior of adding elliptic curve points becomes intuitive, despite the operation being hard to visualize.
 
 *Originally Published September 19, 2023*
+
+# **补充计算过程**
+
+好——下面给出 **在有限域 $\mathbb{F}_{11}$（即模 11 的算术）上**，椭圆曲线
+
+$$
+E:\; y^2 \equiv x^3 + 3 \pmod{11}
+$$
+
+的**详细一步步计算**（点集、加法公式、若干典型加法/倍点的手算过程，以及群结构结论）。我会把每一步模 11 的运算都写清楚。
+
+# 一、点集（列出所有满足关系的有限点）
+
+先枚举 $x=0,1,\dots,10$，计算 $x^3+3 \pmod{11}$，看是否是平方剩余。模 11 的平方剩余集合是
+$\{0,1,3,4,5,9\}$。
+
+计算结果（用心验证过）：
+
+* $x=0:\; x^3+3\equiv3 \Rightarrow y^2\equiv3 \Rightarrow y\equiv5,6$. 得到 $(0,5),(0,6)$.
+* $x=1:\;1+3\equiv4 \Rightarrow y\equiv2,9$. 得到 $(1,2),(1,9)$.
+* $x=2:\;8+3\equiv0 \Rightarrow y\equiv0$. 得到 $(2,0)$.
+* $x=3:\;27+3\equiv8$（非平方）无点。
+* $x=4:\;64+3\equiv1 \Rightarrow y\equiv1,10$. 得到 $(4,1),(4,10)$.
+* $x=5:\;125+3\equiv7$（非平方）无点。
+* $x=6:\;216+3\equiv10$（非平方）无点。
+* $x=7:\;343+3\equiv5 \Rightarrow y\equiv4,7$. 得到 $(7,4),(7,7)$.
+* $x=8:\;512+3\equiv9 \Rightarrow y\equiv3,8$. 得到 $(8,3),(8,8)$.
+* $x=9:\;729+3\equiv6$（非平方）无点。
+* $x=10:\;1000+3\equiv2$（非平方）无点。
+
+有限点集（共 11 个）：
+
+$$
+\{(0,5),(0,6),(1,2),(1,9),(2,0),(4,1),(4,10),(7,4),(7,7),(8,3),(8,8)\}
+$$
+
+再加上无穷远点 $\mathcal{O}$，所以 $|E(\mathbb{F}_{11})| = 12$。
+
+# 二、椭圆曲线加法的代数公式（模 11）
+
+设 $P=(x_1,y_1),\;Q=(x_2,y_2)$（都不是 $\mathcal{O}$）：
+
+* 若 $x_1\not\equiv x_2$（异点相加）：
+
+  $$
+  \lambda \equiv \frac{y_2-y_1}{x_2-x_1}\pmod{11},
+  \quad
+  x_3 \equiv \lambda^2 - x_1 - x_2 \pmod{11},
+  \quad
+  y_3 \equiv \lambda(x_1-x_3)-y_1 \pmod{11}.
+  $$
+
+  结果 $P+Q=(x_3,y_3)$.
+
+* 若 $P=Q$（点倍）且 $y_1\not\equiv0$：
+
+  $$
+  \lambda \equiv \frac{3x_1^2}{2y_1}\pmod{11},
+  \quad x_3 \equiv \lambda^2 - 2x_1,\quad
+  y_3 \equiv \lambda(x_1-x_3)-y_1.
+  $$
+
+* 若 $x_1\equiv x_2$ 且 $y_1\equiv -y_2$（包括 $y_1\equiv0$ 时的情形），则 $P+Q=\mathcal{O}$。
+
+注：分数 $\frac{a}{b}$ 在模 $11$ 中表示 $a\cdot b^{-1}$，用乘法逆元（例如 $3^{-1}\equiv4$ 因为 $3\cdot4\equiv1\pmod{11}$）。
+
+# 三、示例 1 — 两不同点相加：$P=(1,2),\;Q=(4,1)$
+
+计算步骤：
+
+1. 计算分子、分母（模 11）：
+
+   $$
+   y_2-y_1 = 1-2 \equiv -1 \equiv 10 \pmod{11},
+   \qquad
+   x_2-x_1 = 4-1 \equiv 3 \pmod{11}.
+   $$
+2. 求 $3$ 在模 11 下的逆元：$3^{-1}\equiv4$（因为 $3\cdot4=12\equiv1$）。
+3. 斜率：
+
+   $$
+   \lambda \equiv 10\cdot 3^{-1} \equiv 10\cdot4 = 40 \equiv 7 \pmod{11}.
+   $$
+4. 计算 $x_3$：
+
+   $$
+   x_3 \equiv \lambda^2 - x_1 - x_2 \equiv 7^2 -1 -4 =49-5=44\equiv 0 \pmod{11}.
+   $$
+5. 计算 $y_3$：
+
+   $$
+   y_3 \equiv \lambda(x_1-x_3)-y_1 \equiv 7(1-0)-2 =7-2=5 \pmod{11}.
+   $$
+
+所以
+
+$$
+P+Q = (0,5).
+$$
+
+几何对应检查：直线的截距 $c= y_1-\lambda x_1 = 2-7\cdot1 = -5 \equiv 6$。直线是 $y\equiv7x+6$。把它代回曲线可得第三个交点是 $(0,6)$，而公式直接给出的 $(0,5)$ 恰好是 $-(0,6)$ —— 也就是“第三交点取反”这一几何定义在代数公式里已经隐含进去了（所以公式直接产出 $P+Q$）。
+
+# 四、示例 2 — 点倍：计算 $2P$（仍取 $P=(1,2)$）
+
+使用倍点公式：
+
+1. 分子 $3x_1^2 = 3\cdot1^2 = 3$.
+2. 分母 $2y_1 = 4$。求逆元： $4^{-1}\equiv3$（因为 $4\cdot3=12\equiv1$）。
+3. 斜率 $\lambda \equiv 3\cdot 4^{-1} \equiv 3\cdot3 =9 \pmod{11}$.
+4. $x_3 \equiv \lambda^2 - 2x_1 \equiv 9^2 -2 =81-2=79\equiv 2\pmod{11}.$
+5. $y_3 \equiv \lambda(x_1-x_3)-y_1 \equiv 9(1-2)-2 =9(-1)-2 = -9-2=-11\equiv 0.$
+
+所以 $2P = (2,0)$。
+
+# 五、特殊情况：当点的 $y\equiv0$
+
+如果 $P=(2,0)$，则 $2P=\mathcal{O}$。原因：倍点公式里分母 $2y_1\equiv0$ 无逆元，对应几何上切线是竖直线，与曲线在有限点仅相交两次，第三个交点是无穷远点 $\mathcal{O}$ —— 因而 $P+P=\mathcal{O}$。所以 $(2,0)$ 是阶 2 的点。
+
+## 六、再举一例（验证 $3P$ 与 $4P$）
+
+我们已得 $P = (1,2)$，$2P = (2,0)$。于是：
+
+$3P = P + 2P = (1,2) + (2,0)$：
+
+计算斜率 $\lambda = \frac{0 - 2}{2 - 1} \equiv \frac{-2}{1} \equiv 9 \pmod{11}$。
+
+用公式可得 $3P = (1,9)$，正好是 $P$ 的负点（即 $(1,9) = -P$）。
+
+所以 $4P = 3P + P = -P + P = \mathcal{O}$。
+
+因此点 $P = (1,2)$ 的阶是 $4$。
+
+---
+
+## 七、群的总体结构（结论）
+
+我们计算到 $|E(\mathbb{F}_{11})| = 12$（11 个有限点 + 无穷远点）。
+
+有些点的阶如下：
+
+- $(1,2)$ 的阶是 $4$
+- $(2,0)$ 的阶是 $2$
+- 存在点 $(4,1)$ 的阶为 $12$（它是生成元），比如按倍数序列：
+
+由此可见存在元素阶 $12$，说明群是循环的：
+
+$$
+E(\mathbb{F}_{11}) \simeq \mathbb{Z}/12\mathbb{Z}
+$$
+
+---
+
+## 八、总结（要点）
+
+- 给定曲线 $y^2 = x^3 + 3$ 在 $\mathbb{F}_{11}$ 上的有限点共有 $11$ 个，再加无穷远点共 $12$ 个。
+- 加法的代数公式在模 $11$ 下按常规模块算数执行（注意取逆元）。
+- 我演示了两点相加和点倍的逐步手算（包括逆元的求法），并说明了 $y = 0$ 的特殊情况。
+- 群结构：这是一个阶 $12$ 的循环群（存在生成元，如 $(4,1)$）。

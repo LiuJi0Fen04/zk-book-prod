@@ -154,11 +154,24 @@ $$
 \lambda &= \frac{y₂ - y₁}{x₂ - x₁} \\
 x₃ &= \lambda² - x₁ - x₂(Vieta定理
 ) \\
-y₃ &= \lambda(x₁-x₃) - y₁
+y₃ &= \lambda(x₁-x₃) - y₁ 
 \end{align*}
 $$
 
+<u>如果是两个相同的点相加(在有限域上相加要加上mod)：</u> 
+$$
+\begin{align*}
+\lambda = \frac{3x_1^2+ a}{2y_1}\ mod\ p  \\
+\end{align*}
+$$
+$y_3$ is calculated the same way.
+
+
+
+
+
 ### Algebraically demonstrating commutativity and associativity
+
 Because we have a closed form equation, we can prove algebraically that $T⊕U = U⊕T$ given points $T$ and $U$.
 
 We do it as follows
